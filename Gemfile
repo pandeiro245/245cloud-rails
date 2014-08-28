@@ -11,5 +11,6 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 
 gem "kaminari" 
-gem "parse_resource", "~> 1.8.0"
+#gem "parse_resource", "~> 1.8.0"
+gem 'parse_resource', github: 'adelevie/parse_resource'
 
