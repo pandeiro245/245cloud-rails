@@ -10,3 +10,4 @@ config/parse_resource.yml
 
 .c9
 spring
+config/database.yml
