@@ -1,0 +1,3 @@
+Rails.application.config.middleware.use OmniAuth::Builder do
+  provider :ruffnote, 'd0774a954f08bf2c7fe2dad64891129ae80187922c29bec1f01eaca3d54b79a7', '08727041a70fd986ec3fd3daa32d610412c93f7d7867d83304a8f9a1c8cc7939'
+end

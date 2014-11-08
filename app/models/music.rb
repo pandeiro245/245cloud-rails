@@ -1,4 +1,4 @@
 class Music < ParseResource::Base
-  fields :sc_id
+  fields :yt_id, :sc_id, :title, :is_fixed
 end
 
