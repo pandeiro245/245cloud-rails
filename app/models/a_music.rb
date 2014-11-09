@@ -18,7 +18,7 @@ class AMusic < ActiveRecord::Base
       html += (i + 1).to_s
       html += "位：<a href='#"
       html += ranking[i][0]
-      html += "'>"
+      html += "' class='fixed_start'>"
       html += ranking[i][1][:title]
       html += '</a>'
       html += '('
