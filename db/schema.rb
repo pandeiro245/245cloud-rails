@@ -11,6 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20141108000001) do
+
+  create_table "musics", force: true do |t|
+    t.string   "yt_hash"
+    t.integer  "sc_id"
+    t.string   "title"
+    t.boolean  "is_fixed"
+    t.integer  "number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "workloads", force: true do |t|
+    t.string   "yt_hash"
+    t.integer  "sc_id"
+    t.string   "title"
+    t.boolean  "is_done"
+    t.integer  "number"
+    t.string   "user_hash"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

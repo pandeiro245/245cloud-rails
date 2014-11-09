@@ -22,7 +22,7 @@ class User < ParseUser
   def self.sync_auth_data
     self.all.each do |user|
       user.facebook_id = user.attributes['authData']['facebook']['id'].to_i
-      # user.name = user.attributes['authData']['facebook']['id']
+      user.name = user.attributes['authData']['facebook']['name']
       user.save
     end
   end

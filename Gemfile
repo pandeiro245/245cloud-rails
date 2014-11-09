@@ -17,3 +17,12 @@ gem 'oauth'
 gem 'omniauth-ruffnote', github: 'pandeiro245/omniauth-ruffnote'
 
 gem 'soundcloud'
+
+
+group :development, :test do
+  # pry for debug
+  gem 'pry-rails'               # pry base
+  gem 'pry-byebug'              # debugger for pry
+  gem 'pry-stack_explorer'      # call stack viewer
+  gem 'pry-rescue'              # exception event handler
+end
