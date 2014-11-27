@@ -3,7 +3,7 @@ class AWorkload < ActiveRecord::Base
 
   def self.ranking(date = nil)
     users = {}
-    html = ""
+    html = "<h1>Dailyランキング（11/◯◯、◯曜日）</h1>"
     limit = 10
 
     if date
@@ -33,7 +33,6 @@ class AWorkload < ActiveRecord::Base
   end
 
   def self.sync!
-    AWorkload.delete_all
     Workload.limit(10000000).where(is_done: true).each do |w|
       begin
         a = AWorkload.find_or_create_by(
@@ -46,6 +45,7 @@ class AWorkload < ActiveRecord::Base
       rescue
       end
     end
+    'done'
   end
 end
 
