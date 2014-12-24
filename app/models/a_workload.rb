@@ -33,19 +33,37 @@ class AWorkload < ActiveRecord::Base
   end
 
   def self.sync!
+    AWorkload.delete_all
+    AMusic.delete_all
     Workload.limit(10000000).where(is_done: true).each do |w|
-      begin
-        a = AWorkload.find_or_create_by(
-          user_hash: w.attributes['user']['objectId'],
-          created_at: w.attributes['createdAt']
-        )
-        a.is_done    = w.attributes['is_done']
-        a.updated_at = w.attributes['updatedAt']
-        a.save
-      rescue
-      end
+      next unless w.attributes['user']
+      key = w.get_key
+      a = AWorkload.find_or_create_by(
+        user_hash: w.attributes['user']['objectId'],
+        created_at: w.attributes['createdAt'],
+        key: key
+      )
+      a.music_id = AMusic.find_or_create_by(
+        key: key
+      ).id
+      a.is_done    = w.attributes['is_done']
+      a.updated_at = w.attributes['updatedAt']
+      a.save
     end
-    'done'
+    AMusic.all.each do |a_music|
+      a_music.total_count = AWorkload.where(music_id: a_music.id).count
+      if a_music.user_counts
+        user_counts = JSON.parse(user_counts)
+      else
+        user_counts = {}
+      end
+      AWorkload.where(music_id: a_music.id).each do |a_workload|
+        user_counts[a_workload.user_hash] = 0 unless user_counts[a_workload.user_hash]
+        user_counts[a_workload.user_hash] += 1
+      end
+      a_music.user_counts = user_counts.to_json
+      a_music.save!
+    end
   end
 end
 

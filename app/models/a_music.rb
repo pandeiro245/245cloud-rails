@@ -1,4 +1,6 @@
 class AMusic < ActiveRecord::Base
+  self.table_name = "musics"
+
   def self.sync!
     res = {}
     html = ""

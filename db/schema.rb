@@ -11,27 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141108000001) do
+ActiveRecord::Schema.define(version: 20141224152115) do
 
   create_table "musics", force: true do |t|
-    t.string   "yt_hash"
-    t.integer  "sc_id"
     t.string   "title"
     t.boolean  "is_fixed"
-    t.integer  "number"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "total_count"
+    t.string   "key"
+    t.string   "user_counts"
   end
 
   create_table "workloads", force: true do |t|
-    t.string   "yt_hash"
-    t.integer  "sc_id"
     t.string   "title"
     t.boolean  "is_done"
-    t.integer  "number"
     t.string   "user_hash"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "key"
+    t.integer  "music_id"
   end
 
 end

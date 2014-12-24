@@ -1,6 +1,7 @@
 class User < ParseUser
   fields :workload_total_count
   fields :facebook_id
+  fields :facebook_id_str
 
   def self.refresh!
     User.all.each{|u| u.update_workload_count}
@@ -20,10 +21,35 @@ class User < ParseUser
   end
   
   def self.sync_auth_data
-    self.all.each do |user|
-      user.facebook_id = user.attributes['authData']['facebook']['id'].to_i
-      user.name = user.attributes['authData']['facebook']['name']
+    self.limit(300).each do |user|
+      user.facebook_id_str = user.attributes['authData']['facebook']['id']
+      # user.name = user.attributes['authData']['facebook']['name']
       user.save
     end
+  end
+  
+  def self.top
+    html = ""
+    [
+      'eAYx93GzJ8',
+      'F9dj5tdoKf',
+      'IRpFevV39i',
+      'UbuuaB5Bi7',
+      'O9RJN4ANxi',
+      'zxgaoUNv6P',
+      'MnZEm4pR0B',
+      '6NSxlPVVPP',
+      'hqKEEBjBJm',
+      '3qIMNlYUMw',
+      'f7ol3ZT483',
+      '1QV2i4Gi3l',
+      'gwmOZPj9dN',
+      'TUEUJhmv4q',
+      '1FjmHnTTWz'
+    ].each do |user_id|
+      user = User.find(user_id)
+      html += "<img src='#{user.attributes['icon_url']}' style='max-height: 50px;' />"
+    end
+    return html
   end
 end
